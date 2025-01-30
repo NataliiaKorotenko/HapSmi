@@ -13,6 +13,8 @@ const app = express();
 app.use(cors());
 app.use(pino({ transport: { target: "pino-pretty" } }));
 
+// Middleware для парсингу JSON
+app.use(express.json());
 
 app.use("/jokes", jokeRoutes);
 

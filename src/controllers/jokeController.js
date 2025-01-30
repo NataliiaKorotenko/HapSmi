@@ -26,13 +26,18 @@ export const getJokesByCategory = async (req, res) => {
 export const addJoke = async (req, res) => {
   try {
     const { text, category } = req.body;
+    if (!text || !category) {
+      return res.status(400).json({ error: "Text and category are required" });
+    }
     const newJoke = new Joke({ text, category });
     await newJoke.save();
     res.status(201).json(newJoke);
   } catch (error) {
+    console.error("Error details:", error);
     res.status(500).json({ error: "Failed to add joke" });
   }
 };
+
 
 
 
